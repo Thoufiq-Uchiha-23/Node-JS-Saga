@@ -7998,5 +7998,29 @@
     "email": "ljanochrr@oracle.com",
     "gender": "Male",
     "job_title": "VP Quality Control"
+  },
+  {
+    "first_name": "Thoufiq",
+    "last_name": "Izhar",
+    "email": "thoufiqizhar022@gmail.com",
+    "gender": "Male",
+    "job_title": "Software Dev",
+    "id": 1001
+  },
+  {
+    "first_name": "Thoufiq",
+    "last_name": "Izhar",
+    "email": "thoufiqizhar022@gmail.com",
+    "gender": "Male",
+    "job_title": "Software Dev",
+    "id": 1002
+  },
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "email@example.com",
+    "gender": "Male",
+    "job_title": "Software Dev Eng",
+    "id": 1003
   }
 ]
