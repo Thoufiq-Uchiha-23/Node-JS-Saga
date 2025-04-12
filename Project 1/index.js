@@ -35,7 +35,7 @@ app
     const body = req.body;
 
     // Find user Index
-    const userIndex = users.find((users) => users.id === id);
+    const userIndex = users.findIndex((user) => user.id === id);
 
     if (userIndex === -1) {
       return res
@@ -44,15 +44,20 @@ app
     }
 
     // Upgrade only the provided fields
-    users[userIndex] = { ...userIndex, ...body };
+    const updatedUser = { ...users[userIndex], ...body };
+    users[userIndex] = updatedUser;
+    console.log("Updated User", users[userIndex]);
 
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users, null, 2), (err) => {
       if (err) {
+        console.error("Write error:", err); // Debug log
         return res
           .status(500)
           .send({ status: "error", message: "Failed to update user" });
       }
-      return res.send({ status: "success", id: id });
+
+      console.log("File successfully updated"); // Debug log
+      return res.send({ status: "success", id: id, user: users[userIndex] });
     });
   })
   .delete((req, res) => {
@@ -60,23 +65,42 @@ app
     const body = req.body;
 
     // Find user Index
-    const userIndex = users.find((users) => users.id === id);
+    const userIndex = users.findIndex((user) => user.id === id);
     if (userIndex === -1) {
       return res
         .status(404)
         .send({ status: "error", message: "User not found" });
     }
 
+    // Store the deleted user for potential rollback
+    const deletedUser = users[userIndex];
+
+    console.log(
+      `User ${id} removed from memory. New user count: ${users.length}`
+    );
+
     // Remove the user
     users.splice(userIndex, 1);
 
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users, null, 2), (err) => {
       if (err) {
-        return res
-          .status(500)
-          .send({ status: "error", message: "Failed to delete user" });
+        console.error("File write error:", err);
+        // Rollback the deletion in memory
+        users.splice(userIndex, 0, deletedUser);
+        return res.status(500).send({
+          status: "error",
+          message: "Failed to delete user from file",
+          error: err.message,
+        });
       }
-      return res.send({ status: "success", id: id });
+
+      console.log(`User ${id} successfully deleted from file`);
+      return res.send({
+        status: "success",
+        id: id,
+        message: "User deleted successfully",
+        deletedUser: deletedUser, // Optional: return the deleted user data
+      });
     });
   });
 
@@ -95,14 +119,14 @@ app.post("/api/users", (req, res) => {
   });
 });
 
-app.patch("/api/users/:id", (req, res) => {
-  // TODO: Edit the user with id
-  return res.json({ status: "pending" });
-});
+// app.patch("/api/users/:id", (req, res) => {
+//   // TODO: Edit the user with id
+//   return res.json({ status: "pending" });
+// });
 
-app.delete("/api/users/:id", (req, res) => {
-  // TODO: Delete the user with id
-  return res.json({ status: "pending" });
-});
+// app.delete("/api/users/:id", (req, res) => {
+//   // TODO: Delete the user with id
+//   return res.json({ status: "pending" });
+// });
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
