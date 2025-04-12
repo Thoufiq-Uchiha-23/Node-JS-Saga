@@ -10,14 +10,20 @@ app.use(express.urlencoded({ extended: false }));
 
 // MIDDLEWARE - Plugin
 app.use((req, res, next) => {
-  console.log("Hello from Middleware 1")
-  next();
-})
+  // console.log("Hello from Middleware 1")
+  fs.appendFile(
+    "./log.txt",
+    `\n ${Date.now()} ${req.method} ${req.id} ${req.path}`,
+    (err, data) => {
+      next();
+    }
+  );
+});
 
 app.use((req, res, next) => {
-  console.log("Hello from Middleware 2")
+  console.log("Hello from Middleware 2");
   next();
-})
+});
 
 // ROUTES
 app.get("/users", (req, res) => {
