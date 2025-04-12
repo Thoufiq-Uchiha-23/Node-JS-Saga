@@ -31,12 +31,53 @@ app
     return res.json(user);
   })
   .put((req, res) => {
-    // Edit the user with id
-    return res.json({ status: "pending" });
+    const id = Number(req.params.id);
+    const body = req.body;
+
+    // Find user Index
+    const userIndex = users.find((users) => users.id === id);
+
+    if (userIndex === -1) {
+      return res
+        .status(404)
+        .send({ status: "error", message: "User not found" });
+    }
+
+    // Upgrade only the provided fields
+    users[userIndex] = { ...userIndex, ...body };
+
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
+      if (err) {
+        return res
+          .status(500)
+          .send({ status: "error", message: "Failed to update user" });
+      }
+      return res.send({ status: "success", id: id });
+    });
   })
   .delete((req, res) => {
-    // Delete the user with id
-    return res.json({ status: "pending" });
+    const id = Number(req.params.id);
+    const body = req.body;
+
+    // Find user Index
+    const userIndex = users.find((users) => users.id === id);
+    if (userIndex === -1) {
+      return res
+        .status(404)
+        .send({ status: "error", message: "User not found" });
+    }
+
+    // Remove the user
+    users.splice(userIndex, 1);
+
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+      if (err) {
+        return res
+          .status(500)
+          .send({ status: "error", message: "Failed to delete user" });
+      }
+      return res.send({ status: "success", id: id });
+    });
   });
 
 app.get("/api/users/:id", (req, res) => {
