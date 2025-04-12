@@ -1,3 +1,5 @@
 
  1744479802783 GET undefined /api/users
  1744479824621 GET undefined /api/users/1
+ 1744481724431 GET ::1 /api/users/1
+ 1744481765537 GET ::1 /api/users
