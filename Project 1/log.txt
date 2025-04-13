@@ -3,3 +3,9 @@
  1744479824621 GET undefined /api/users/1
  1744481724431 GET ::1 /api/users/1
  1744481765537 GET ::1 /api/users
+ 1744559764154 GET ::1 /api/users
+ 1744559817614 GET ::1 /api/users
+ 1744559840013 GET ::1 /api/users
+ 1744559920588 GET ::1 /api/users
+ 1744561079294 GET ::1 /api/users
+ 1744561133543 GET ::1 /api/users
