@@ -9,3 +9,23 @@
  1744559920588 GET ::1 /api/users
  1744561079294 GET ::1 /api/users
  1744561133543 GET ::1 /api/users
+ 1744562563787 POST ::1 /api/users
+ 1744562697739 GET ::1 /api/userss
+ 1744562710081 GET ::1 /api/users
+ 1744562717406 GET ::1 /api/users/1000000
+ 1744562801986 GET ::1 /api/users/1000000
+ 1744562807343 GET ::1 /api/users/1000000
+ 1744562881994 GET ::1 /api/users/1000000
+ 1744562888514 GET ::1 /api/users/1
+ 1744562890720 GET ::1 /api/users/1
+ 1744562915288 GET ::1 /api/users/1
+ 1744562946639 GET ::1 /api/users/1
+ 1744562959408 GET ::1 /api/users/1
+ 1744562990014 GET ::1 /api/users/1
+ 1744562998457 GET ::1 /api/users/1
+ 1744563006334 GET ::1 /api/users/1
+ 1744563082813 GET ::1 /api/users
+ 1744563092994 GET ::1 /api/users/1
+ 1744563097689 GET ::1 /api/users/10
+ 1744563109649 GET ::1 /api/users
+ 1744563135939 GET ::1 /api/users/2
