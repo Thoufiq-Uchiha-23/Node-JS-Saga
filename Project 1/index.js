@@ -1,37 +1,20 @@
 const express = require("express");
 // const users = require("./MOCK_DATA.json");
 const fs = require("fs");
-const mongoose = require("mongoose");
 const { type } = require("os");
 const app = express();
+const { connectMongoDB } = require("./connection.js");
 const PORT = 8000;
 
-const userRouter = require("./routes/user.routes")
+const { logReqRes } = require("./middlewares/index.js");
 
-// Connection
-mongoose
-  .connect("mongodb://0.0.0.0/youtube-app-1")
-  .then(() => {
-    console.log("MongoDB Connected");
-  })
-  .catch((err) => {
-    console.log("Mongo Error", err);
-  });
+const userRouter = require("./routes/user.routes");
+
+connectMongoDB("mongodb://0.0.0.0/youtube-app-1");
 
 // Middlewares - Plugins
 app.use(express.urlencoded({ extended: false }));
-
-// MIDDLEWARE - Plugin
-app.use((req, res, next) => {
-  // console.log("Hello from Middleware 1")
-  fs.appendFile(
-    "./log.txt",
-    `\n ${Date.now()} ${req.method} ${req.ip} ${req.path}`,
-    (err, data) => {
-      next();
-    }
-  );
-});
+app.use(logReqRes("log.txt"));
 
 app.use((req, res, next) => {
   console.log("Hello from Middleware 2");
