@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
   return res.send(html);
 });
 
-router.get("/", handleGetAllDBUsers);
+router.route("/").get("/", handleGetAllDBUsers).post("/", handleCreateNewUser);
 
 router
   .route("/:id")
@@ -36,7 +36,5 @@ router
 
 //   return res.json(user);
 // });
-
-router.post("/", handleCreateNewUser);
 
 module.exports = router;
