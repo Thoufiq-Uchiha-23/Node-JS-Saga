@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
   return res.send(html);
 });
 
-router.route("/").get("/", handleGetAllDBUsers).post("/", handleCreateNewUser);
+router.route("/").get(handleGetAllDBUsers).post(handleCreateNewUser);
 
 router
   .route("/:id")
