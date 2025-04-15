@@ -1,16 +1,18 @@
 const express = require("express");
 // const users = require("./MOCK_DATA.json");
-const fs = require("fs");
-const { type } = require("os");
-const app = express();
 const { connectMongoDB } = require("./connection.js");
+const fs = require("fs");
+
+const app = express();
 const PORT = 8000;
 
 const { logReqRes } = require("./middlewares/index.js");
 
 const userRouter = require("./routes/user.routes");
 
-connectMongoDB("mongodb://0.0.0.0/youtube-app-1");
+connectMongoDB("mongodb://0.0.0.0/youtube-app-1").then(() => {
+  console.log("MongoDB connected successfully");
+})
 
 // Middlewares - Plugins
 app.use(express.urlencoded({ extended: false }));
@@ -22,6 +24,6 @@ app.use((req, res, next) => {
 });
 
 // ROUTES
-app.use("/user", userRouter);
+app.use("/api/users", userRouter);
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
