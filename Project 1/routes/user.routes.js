@@ -10,17 +10,17 @@ const {
 } = require("../controllers/users.controller");
 
 // ROUTES
-router.get("/", async (req, res) => {
-  const allDBUsers = await User.find({});
-  const html = `
-    <ul>
-    ${allDBUsers
-      .map((user) => `<li>${user.firstName} - ${user.email}</li>`)
-      .join("")}
-    </ul>
-    `;
-  return res.send(html);
-});
+// router.get("/", async (req, res) => {
+//   const allDBUsers = await User.find({});
+//   const html = `
+//     <ul>
+//     ${allDBUsers
+//       .map((user) => `<li>${user.firstName} - ${user.email}</li>`)
+//       .join("")}
+//     </ul>
+//     `;
+//   return res.send(html);
+// });
 
 router.route("/").get(handleGetAllDBUsers).post(handleCreateNewUser);
 
