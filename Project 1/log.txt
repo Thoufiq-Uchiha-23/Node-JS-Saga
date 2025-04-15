@@ -50,3 +50,8 @@
  1744648950691 GET ::1 /api/users
  1744649030787 DELETE ::1 /api/users/67fd367684b47abac70caa7f
  1744649036084 GET ::1 /api/users
+ 1744723589853 GET ::1 /api/users
+ 1744723639956 GET ::1 /api/users
+ 1744723659692 POST ::1 /api/users
+ 1744723683681 POST ::1 /api/users
+ 1744723694955 GET ::1 /api/users
