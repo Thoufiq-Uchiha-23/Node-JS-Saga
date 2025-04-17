@@ -13,7 +13,10 @@ const generateShortURL = async (req, res) => {
   });
 
   console.log("short URL", body.url);
-  return res.json({ id: shortID });
+  return res.render("home", {
+    id: shortID,
+  });
+  // return res.json({ id: shortID });
 };
 
 const getAnalytics = async (req, res) => {
