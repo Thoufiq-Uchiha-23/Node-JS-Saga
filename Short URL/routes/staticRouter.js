@@ -4,7 +4,7 @@ const { restrictTo } = require("../middlewares/auth.js");
 
 const router = express.Router();
 
-router.get("/", restrictTo(["NORMAL"]) , async (req, res) => {
+router.get("/", restrictTo(["NORMAL"]), async (req, res) => {
   const allurls = await URL.find({ createdBy: req.user._id });
   return res.render("home", {
     urls: allurls,
